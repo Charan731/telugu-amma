@@ -3,310 +3,167 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Telugu‑Amma — Minimal Telugu Script</title>
-  <meta name="description" content="A single‑file website that explains the Telugu‑Amma minimal script concept in Telugu & English, with examples and a live on‑screen keyboard to type the 28 letters." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Telugu‑Amma — సులభమైన డిజిటల్ తెలుగు</title>
+  <meta name="description" content="Telugu‑Amma: 28‑letter minimal Telugu script for easy digital typing. Explaination in Telugu & English, many examples, and an on‑screen keyboard placed below for simple use." />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b1020; /* deep navy */
-      --panel:#101733;
-      --muted:#aab3cf;
-      --text:#eaf0ff;
-      --accent:#7c8cff;
-      --accent-2:#41d1b7;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 18px;
-    }
+    :root{--bg:#fcfcff;--card:#fff;--muted:#556;--accent:#2b6df6;--radius:14px}
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:"Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color:var(--text);
-      background: radial-gradient(1200px 800px at 20% -10%, #1a2250 0%, #0c1124 45%, #070b18 100%);
-    }
-    .wrap{max-width:1100px;margin:0 auto;padding:28px}
-    header{
-      display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between;margin-bottom:18px
-    }
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:grid;place-items:center;color:#0c1124;font-weight:900;box-shadow:var(--shadow)
-    }
-    h1{font-family:"Noto Sans Telugu","Inter",sans-serif;font-weight:800;letter-spacing:.2px;margin:0;font-size:clamp(24px,3.4vw,40px)}
-    .sub{color:var(--muted);font-size:14px}
-
-    .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}
-    @media (max-width: 980px){.grid{grid-template-columns:1fr;}}
-
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-          border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:18px 18px 16px;box-shadow:var(--shadow)}
-    .card h2, .card h3{font-family:"Noto Sans Telugu","Inter",sans-serif;margin:0 0 10px 0}
-    .card h2{font-size:clamp(18px,2.6vw,24px)}
-    .card h3{font-size:clamp(16px,2vw,20px);color:#cfd7ff}
-    p{line-height:1.6;color:#dfe6ff}
-    .hint{color:var(--muted);font-size:13px}
-
-    .kbd{display:inline-flex;align-items:center;justify-content:center;min-width:30px;padding:6px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
-
-    /* Keyboard */
-    .keys{display:grid;grid-template-columns:repeat(10, 1fr);gap:8px;margin-top:12px}
-    .key{font-family:"Noto Sans Telugu","Inter",sans-serif;font-size:22px;padding:12px 10px;border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-      cursor:pointer;user-select:none;transition:transform .03s ease, background .2s}
-    .key:hover{transform:translateY(-1px)}
-    .key:active{transform:translateY(1px)}
-
-    .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 8px}
-    .btn{padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);
-      color:var(--text);cursor:pointer}
-    .btn:active{transform:translateY(1px)}
-
-    textarea{
-      width:100%;height:160px;resize:vertical;border-radius:14px;border:1px solid rgba(255,255,255,.14);
-      padding:14px 16px;font-size:22px;line-height:1.6;background:rgba(255,255,255,.04);color:var(--text);
-      font-family:"Noto Sans Telugu","Inter",sans-serif
-    }
-
-    .examples{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:10px}
-    @media (max-width: 760px){.examples{grid-template-columns:1fr}}
-    .ex{padding:12px;border:1px dashed rgba(255,255,255,.2);border-radius:14px;background:rgba(255,255,255,.03)}
-    .ex .t{font-family:"Noto Sans Telugu";font-size:20px}
-    .ex .a{font-size:14px;color:var(--muted)}
-
-    footer{margin:28px 0 10px;color:var(--muted);font-size:13px;text-align:center}
-    .pill{display:inline-block;border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:6px 10px;margin-right:8px;background:rgba(255,255,255,.06)}
-
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width: 800px){.two-col{grid-template-columns:1fr}}
-    .badge{font-size:12px;color:#0b1020;background:linear-gradient(135deg,var(--accent-2),var(--accent));display:inline-block;padding:6px 10px;border-radius:999px;font-weight:700;letter-spacing:.3px}
-
-    code.inline{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:2px 6px}
+    body{font-family:Inter, 'Noto Sans Telugu', system-ui, -apple-system, sans-serif;margin:0;background:#f3f6fb;color:#0b1340}
+    .wrap{max-width:980px;margin:28px auto;padding:20px}
+    header{display:flex;align-items:flex-start;gap:16px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#2b6df6,#41d1b7);display:grid;place-items:center;color:white;font-weight:800;font-family:'Noto Sans Telugu';font-size:20px}
+    h1{margin:0;font-size:22px}
+    .lead{margin-top:6px;color:var(--muted)}
+    .card{background:var(--card);border-radius:var(--radius);padding:18px;margin-top:18px;box-shadow:0 6px 18px rgba(20,30,60,0.06)}
+    .section-title{font-family:'Noto Sans Telugu';font-size:18px;margin-bottom:8px}
+    p{line-height:1.6;color:#113}
+    .kbd{display:inline-block;padding:6px 10px;border-radius:8px;background:#eef4ff;border:1px solid #dbe8ff;margin-right:6px}
+    .examples-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media(max-width:720px){.examples-grid{grid-template-columns:1fr}}
+    .ex{padding:10px;border-radius:10px;background:#fbfeff;border:1px solid #eef6ff}
+    .ex .tel{font-family:'Noto Sans Telugu';font-size:20px}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .btn{padding:8px 12px;border-radius:10px;border:1px solid #e0e7ff;background:#fff;cursor:pointer}
+    textarea{width:100%;min-height:140px;padding:12px;border-radius:10px;border:1px solid #e6eefc;font-size:18px;font-family:'Noto Sans Telugu',Inter}
+    .keyboard{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;margin-top:12px}
+    .key{padding:12px;border-radius:10px;border:1px solid #e6eefc;background:#fff;text-align:center;font-size:18px;cursor:pointer}
+    .muted{color:var(--muted)}
+    footer{margin-top:20px;color:var(--muted);font-size:13px;text-align:center}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div class="brand">
-        <div class="logo">తఅ</div>
-        <div>
-          <h1>Telugu‑Amma — 28‑Letter Minimal Telugu Script</h1>
-          <div class="sub">Made for fast, clean typing on digital platforms — WhatsApp, YouTube comments, social media.</div>
-        </div>
-      </div>
+      <div class="logo">తఅ</div>
       <div>
-        <span class="pill">Traditional outside • Telugu‑Amma inside (digital)</span>
+        <h1>Telugu‑Amma — సులభమైన డిజిటల్ తెలుగు</h1>
+        <div class="lead">Telugu‑Amma = 28 అక్షరాలు • సులభమైన టైపింగ్ • WhatsApp, YouTube, Instagram, social media కోసం</div>
       </div>
     </header>
 
-    <div class="grid">
-      <!-- Left: Concept & Examples -->
-      <section class="card">
-        <h2>సంకల్పం (Concept in Telugu)</h2>
-        <p>
-          <strong>Telugu‑Amma</strong> అనేది సంప్రదాయ తెలుగు లిపిని <em>28 అక్షరాల</em>కి కుదించి, 
-          <span class="kbd">అచ్చులు</span> మరియు <span class="kbd">హల్లులు</span>ను ఎప్పుడూ విడిగా రాసే సింపుల్ పద్ధతి. 
-          గుణింతాలు, ఒత్తులు అవసరం లేదు. ప్రతి <em>ధ్వని = ఒక పూర్తిస్థాయి అక్షరం</em>.
-        </p>
-        <div class="two-col">
-          <div class="card" style="padding:12px">
-            <h3>ఎందుకు?</h3>
-            <p class="hint">డిజిటల్ ప్లాట్‌ఫారమ్స్‌లో తెలుగు టైపింగ్ కష్టం. English ఆధిపత్యం. అందుకే — సులువు, వేగవంతమైన తెలుగు టైపింగ్ కోసం ఈ పద్ధతి.</p>
-          </div>
-          <div class="card" style="padding:12px">
-            <h3>ఎలా?</h3>
-            <p class="hint">Consonant + Vowel ని కలపకుండా, పక్కపక్కనే రాయాలి. ఉదా: <span class="t">చరణ్</span> → <span class="t">చఅరఅన</span></p>
-          </div>
-        </div>
+    <!-- Clear Intro in Telugu -->
+    <section class="card">
+      <div class="section-title">తెలుగు‑అమ్మ — సంక్షిప్తంగా (Telugu)</div>
+      <p>
+        <strong>తెలుగు‑అమ్మ</strong> అనేది సంప్రదాయ తెలుగు లిపిని కొంచెం సరళీకృతం చేసి 28 బేస్ అక్షరాలు తీసుకుని రూపొందించిన ఒక డిజిటల్‑ఫ్రెండ్లీ స్క్రిప్ట్.
+        ప్రతి ధ్వని కోసం పూర్ణ అక్షరం వాడతాం — గుణింతాలు, ఒత్తులు మరియు సంయుక్తాక్షరాలు అవసరం లేదు.
+      </p>
+      <p class="muted">(ఇది బహుళమాట్లలో: బాహ్యంగా పుస్తకాలు, అధికారిక రాతల్లో సంప్రదాయ తెలుగు; డిజిటల్‌లో — Telugu‑Amma.)</p>
+    </section>
 
-        <h2 style="margin-top:14px">Concept (in English)</h2>
-        <p>
-          <strong>Telugu‑Amma</strong> is a minimal <em>28‑letter</em> Telugu script designed for digital use. 
-          Every consonant and vowel is written separately; no conjuncts, no combining signs. 
-          It turns the abugida into a simple alphabet that’s fast to type and easy to read.
-        </p>
+    <!-- Clear Intro in English -->
+    <section class="card">
+      <div class="section-title">Telugu‑Amma — What & Why (English)</div>
+      <p>
+        <strong>Telugu‑Amma</strong> is a simplified 28‑letter Telugu script for fast, readable digital typing. Every sound is written as a separate full letter — no conjuncts or combining marks. It helps people write Telugu easily in chats, comments, and social media where English currently dominates.
+      </p>
+    </section>
 
-        <h3>Core Alphabet (28)</h3>
-        <p class="hint">Vowels (10): అ ఆ ఇ ఈ ఉ ఊ ఎ ఏ ఐ ఓ &nbsp; • &nbsp; Consonants (18): క గ చ జ ట డ త ద న ప బ మ య ర ల వ శ స హ</p>
+    <!-- Traditional script explanation -->
+    <section class="card">
+      <div class="section-title">సాంప్రదాయ తెలుగు లిపి గురించి (About Traditional Script)</div>
+      <p>
+        సంప్రదాయ తెలుగు లిపి ఒక <em>abugida</em> — consonant మీదే vowel signs జత చేస్తాం. ఇది అచ్చులు, హల్లులు, గుణింతాలు, ఒత్తులు, మరియు సంయుక్తాక్షరాల వల్ల చాలా సంక్లిష్టంగా ఉంటుంది. పూర్తిగా keyboard‑friendly చేయాలంటే, ప్రతిసారి correct glyphs వాడటం కష్టమైనది, ముఖ్యంగా మొబైల్ కోసం.
+      </p>
+    </section>
 
-        <h3>Spelling Examples (తెలుగు → Telugu‑Amma)</h3>
-        <div class="examples" id="examples">
-          <div class="ex">
-            <div class="t">చరణ్ → చఅరఅన</div>
-            <div class="a">Charan → cha‑a‑ra‑a‑na</div>
-          </div>
-          <div class="ex">
-            <div class="t">రామ → రఆమఅ</div>
-            <div class="a">Rama → ra‑aa‑ma‑a</div>
-          </div>
-          <div class="ex">
-            <div class="t">ప్రాణం → పరఆనమ</div>
-            <div class="a">Prāṇam → pa‑ra‑aa‑na‑ma (no conjuncts)</div>
-          </div>
-          <div class="ex">
-            <div class="t">తెలుగు → తఎలఉగఉ</div>
-            <div class="a">Telugu → ta‑e‑la‑u‑ga‑u</div>
-          </div>
-          <div class="ex">
-            <div class="t">స్నేహం → సనఏహమ</div>
-            <div class="a">Sneham → sa‑na‑e‑ha‑ma</div>
-          </div>
-          <div class="ex">
-            <div class="t">భారత్ → బఆరఅత</div>
-            <div class="a">Bhārat → ba‑aa‑ra‑a‑ta</div>
-          </div>
-        </div>
-        <p class="hint">Note: Anusvāra (ం) is written as <strong>మ</strong>; Visarga (ః) can be omitted; long vowels are explicit (e.g., ఆ).</p>
-      </section>
-
-      <!-- Right: Live Keyboard & Editor -->
-      <section class="card">
-        <h2>Type in Telugu‑Amma (Live)</h2>
-        <div class="toolbar">
-          <button class="btn" id="copyBtn" title="Copy text">Copy</button>
-          <button class="btn" id="clearBtn" title="Clear">Clear</button>
-          <button class="btn" id="exportBtn" title="Download as .txt">Download .txt</button>
-        </div>
-        <textarea id="editor" placeholder="Type here using the on‑screen keyboard…"></textarea>
-
-        <h3 style="margin-top:14px">On‑Screen Keyboard (28 Letters)</h3>
-        <div class="keys" id="keyboard"></div>
-
-        <p class="hint" style="margin-top:10px">
-          Tip: Click keys to insert. Use <span class="kbd">Backspace</span> or <span class="kbd">Delete</span> to edit like normal.
-        </p>
-
-        <h3 style="margin-top:16px">Quick Builder</h3>
-        <p class="hint">Make your own examples and add them below for learners.</p>
-        <div class="two-col">
-          <input id="exNative" class="btn" style="width:100%;text-align:left" placeholder="Native word (e.g., చరణ్)…" />
-          <input id="exAmma" class="btn" style="width:100%;text-align:left" placeholder="Amma spelling (e.g., చఅరఅన)…" />
-        </div>
-        <div class="toolbar">
-          <button class="btn" id="addExample">Add to Examples</button>
-        </div>
-      </section>
-    </div>
-
-    <section class="card" style="margin-top:22px">
-      <h2>Rules (Short)</h2>
+    <!-- Aim and social media focus -->
+    <section class="card">
+      <div class="section-title">మా లక్ష్యం (Our Aim)</div>
+      <p>
+        Telegram, WhatsApp, YouTube comments, Instagram, Twitter వంటి డిజిటల్ ప్లాట్‌ఫారమ్‌లలో English ఆధిక్యం వల్ల native Telugu ఉనికి తగ్గిపోకుండా ఉండాలి. Telugu‑Amma ద్వారా:
+      </p>
       <ul>
-        <li>Write every sound separately: Consonant + Vowel → two letters (e.g., క + ఆ = కఆ)</li>
-        <li>No ottulu / conjuncts; no half‑letters.</li>
-        <li>Long vowels are explicit: ఆ ఈ ఊ ఏ ఐ ఓ are written as themselves.</li>
-        <li>Anusvāra (ం) → write <strong>మ</strong> (e.g., నమం → నఅమఅమ)</li>
-        <li>Visarga (ః) may be omitted; chandrabindu (ఁ) can be ignored.</li>
-        <li>Close sounds (శ/స) can share the same letter unless you explicitly add variants.</li>
+        <li>వాడకంలో సులువు ఉండే ఒక స్క్రిప్ట్ ఇవ్వాలి.</li>
+        <li>వైద్యంగా తెలుగుని (mother Telugu) డిజిటల్ ప్రపంచంలో ఉంచాలి.</li>
+        <li>ఇంగ్లీష్‌ను ద్వేషించకుండా, అది అవసరం ఉన్న చోటు లో వినియోగించకూడదని కాదు — కానీ మా తల్లుభాష కోసం ఒక మార్గము కావాలి.</li>
       </ul>
     </section>
 
+    <!-- Cross-language applicability -->
+    <section class="card">
+      <div class="section-title">ఇది ఇతర భాషలకు కూడా అన్వయించవచ్చు (Applicability to Other Languages)</div>
+      <p>
+        Telugu‑Amma స్టైల్ ఆధారం తీసుకుని similar approach Tamil, Kannada, Malayalam, Hindi వంటి భాషలకు కూడా చేయవచ్చు — core vowels+consonants మాత్రమే ఉంచి, conjuncts లేని సిస్టమ్ తయారు చేయడం ద్వారా డిజిటల్ టైపింగ్ సులభం అవుతుంది.
+      </p>
+    </section>
+
+    <!-- Reasons: many reasons to protect mother Telugu -->
+    <section class="card">
+      <div class="section-title">నాకు ఎందుకు ముఖ్యం? (Reasons — Why protect Telugu)</div>
+      <p>నేను తెలుగు మనిషిని. నేను ఇంగ్లీష్‌ను ద్వేషించను — నేను ఇంగ్లీష్‌ను గౌరవిస్తాను. కానీ below కారణాల వల్ల నేను Telugu‑Amma రూపొందించాను:</p>
+      <ul>
+        <li>భాష సంరక్షణ — భాష మృత్యువు కాకూడదు. డిజిటల్‌లో ఉంది అంటే భాష బలంగా ఉంటుంది.</li>
+        <li>సుశिक्षణ & స్పష్టత — చిన్న పిల్లలు, యువత, మొబైల్ యూజర్లు తమ తల్లి భాషలో ఫాస్ట్ టైప్ చేయగలగాలి.</li>
+        <li>సాంస్కృతిక గుర్తింపు — మన సంస్కృతికి సంభ్రమం కలగాలి; ప్రతి తల్లియేం భాషకి గౌరవం ఉండాలి.</li>
+        <li>డిజిటల్ సమాన అవకాశాలు — స్థానిక భాషలో content తయారు చేయడం సంస్థలకి, బిజినెస్‌లకి, ఐటి‑ప్రాజెక్టులకి పలు అవకాశాలు తెస్తుంది.</li>
+        <li>సులభంగా ఆవిష్కరణలు చేయడానికి — కొత్త keyboard‑apps, transliteration tools, fonts త్వరగా తయారవుతాయి.</li>
+      </ul>
+      <p class="muted">మీరు నాకు ఇంగ్లీష్‌లో మెసేజ్ పంపినప్పుడు నేను కూడా ఇంగ్లీష్‌లో ప్రతిస్పందిస్తాను — అది problem కాదు. నేను తెలుగు‑అమ్మను సృష్టించాను ఎందుకంటే నేను నా తల్లీభాషను ప్రేమిస్తాను.</p>
+    </section>
+
+    <!-- Many examples heading -->
+    <section class="card">
+      <div class="section-title">బాగా బహుళ ఉదాహరణలు (Many Examples)</div>
+      <div class="examples-grid">
+        <div class="ex"><div class="tel">చరణ్ → చఅరఅన</div><div class="muted">Charan → cha‑a‑ra‑a‑na</div></div>
+        <div class="ex"><div class="tel">రామ → రఆమఅ</div><div class="muted">Rama → ra‑aa‑ma‑a</div></div>
+        <div class="ex"><div class="tel">ప్రాణం → పరఆనమ</div><div class="muted">Prāṇam → pa‑ra‑aa‑na‑ma</div></div>
+        <div class="ex"><div class="tel">తెలుగు → తஎలఉగఉ</div><div class="muted">Telugu → ta‑e‑la‑u‑gu‑u</div></div>
+        <div class="ex"><div class="tel">స్నేహం → సనఏహమ</div><div class="muted">Sneham → sa‑na‑e‑ha‑ma</div></div>
+        <div class="ex"><div class="tel">భారత్ → బఆరఅత</div><div class="muted">Bharat → ba‑aa‑ra‑a‑ta</div></div>
+        <div class="ex"><div class="tel">మనము → మఅనఅమఅ</div><div class="muted">Manamu → ma‑a‑na‑a‑ma‑a</div></div>
+        <div class="ex"><div class="tel">సాహసికుడు → సఆహఅసఇకఉడఉ</div><div class="muted">Sāhasikuḍu → sa‑aa‑ha‑a‑sa‑i‑ku‑u‑du‑u</div></div>
+      </div>
+    </section>
+
+    <!-- Live typing area with keyboard below -->
+    <section class="card">
+      <div class="section-title">ఇక్కడ టైపు చేయండి — Keyboard క్రింద ఉంది (Type Below)</div>
+      <textarea id="editor" placeholder="మీరు ఇక్కడ click చేసి లేదా కీస్ ద్వారా type చేయవచ్చు..."></textarea>
+      <div class="toolbar">
+        <button class="btn" id="copyBtn">Copy</button>
+        <button class="btn" id="clearBtn">Clear</button>
+        <button class="btn" id="downloadBtn">Download .txt</button>
+      </div>
+
+      <div style="margin-top:12px;font-weight:700">Keyboard (28 letters)</div>
+      <div class="keyboard" id="keyboard"></div>
+      <div style="margin-top:10px;color:var(--muted)">Backspace, Space and Enter keys are provided on the keyboard. You can add your own examples in the examples section above.</div>
+    </section>
+
     <footer>
-      <div>© Telugu‑Amma — A minimal script idea by its creator. This demo site is open and single‑file.</div>
+      <div>Created by the Telugu‑Amma creator — a simple demo to share the idea. Respect for English — love for Telugu.</div>
     </footer>
   </div>
 
   <script>
-    // Core 28 letters (provided by the creator)
     const VOWELS = ["అ","ఆ","ఇ","ఈ","ఉ","ఊ","ఎ","ఏ","ఐ","ఓ"];
     const CONSONANTS = ["క","గ","చ","జ","ట","డ","త","ద","న","ప","బ","మ","య","ర","ల","వ","శ","స","హ"];
     const LETTERS = [...VOWELS, ...CONSONANTS];
-
     const keyboard = document.getElementById('keyboard');
     const editor = document.getElementById('editor');
 
     function makeKey(label){
-      const b = document.createElement('button');
-      b.className = 'key';
-      b.type = 'button';
-      b.textContent = label;
-      b.addEventListener('click',() => insertAtCursor(editor, label));
-      return b;
+      const btn = document.createElement('button');
+      btn.className = 'key'; btn.type='button'; btn.textContent = label;
+      btn.addEventListener('click', ()=> insertAtCursor(editor, label));
+      return btn;
     }
+    LETTERS.forEach(l => keyboard.appendChild(makeKey(l)));
+    // utility keys
+    const back = makeKey('⌫'); back.addEventListener('click', ()=>{ const s=editor.selectionStart,e=editor.selectionEnd,v=editor.value; if(s===e&&s>0){editor.value=v.slice(0,s-1)+v.slice(e);editor.selectionStart=editor.selectionEnd=s-1;}else{const left=Math.min(s,e),right=Math.max(s,e);editor.value=v.slice(0,left)+v.slice(right);editor.selectionStart=editor.selectionEnd=left;} editor.focus();}); keyboard.appendChild(back);
+    const space = makeKey('␣'); space.addEventListener('click', ()=>insertAtCursor(editor,' ')); keyboard.appendChild(space);
+    const enter = makeKey('↵'); enter.addEventListener('click', ()=>insertAtCursor(editor,'
+')); keyboard.appendChild(enter);
 
-    function buildKeyboard(){
-      LETTERS.forEach(l => keyboard.appendChild(makeKey(l)));
-      // Utility keys
-      const back = makeKey('⌫');
-      back.title = 'Backspace';
-      back.addEventListener('click',()=>{
-        const {selectionStart, selectionEnd, value} = editor;
-        if(selectionStart === selectionEnd && selectionStart>0){
-          editor.value = value.slice(0, selectionStart-1) + value.slice(selectionEnd);
-          editor.selectionStart = editor.selectionEnd = selectionStart-1;
-        }else{
-          const left = Math.min(selectionStart, selectionEnd);
-          const right = Math.max(selectionStart, selectionEnd);
-          editor.value = value.slice(0, left) + value.slice(right);
-          editor.selectionStart = editor.selectionEnd = left;
-        }
-        editor.focus();
-      });
-      keyboard.appendChild(back);
-      const space = makeKey('␣'); space.title = 'Space'; space.addEventListener('click',()=>insertAtCursor(editor,' ')); keyboard.appendChild(space);
-      const nl = makeKey('↵'); nl.title = 'New line'; nl.addEventListener('click',()=>insertAtCursor(editor,'\n')); keyboard.appendChild(nl);
-    }
+    function insertAtCursor(el, text){ const s=el.selectionStart,e=el.selectionEnd,v=el.value; el.value = v.slice(0,s)+text+v.slice(e); const pos = s+text.length; el.selectionStart = el.selectionEnd = pos; el.focus(); }
 
-    function insertAtCursor(el, text){
-      const start = el.selectionStart;
-      const end = el.selectionEnd;
-      const v = el.value;
-      el.value = v.slice(0,start) + text + v.slice(end);
-      const pos = start + text.length;
-      el.selectionStart = el.selectionEnd = pos;
-      el.focus();
-    }
-
-    // Toolbar actions
-    document.getElementById('copyBtn').addEventListener('click', async () => {
-      try{
-        await navigator.clipboard.writeText(editor.value);
-        toast('Copied to clipboard');
-      }catch(e){
-        toast('Copy failed');
-      }
-    });
-    document.getElementById('clearBtn').addEventListener('click', () => { editor.value = ''; editor.focus(); });
-    document.getElementById('exportBtn').addEventListener('click', () => {
-      const blob = new Blob([editor.value], {type:'text/plain;charset=utf-8'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'telugu-amma.txt'; a.click();
-      URL.revokeObjectURL(url);
-    });
-
-    // Add examples dynamically
-    const exNative = document.getElementById('exNative');
-    const exAmma = document.getElementById('exAmma');
-    const exList = document.getElementById('examples');
-    document.getElementById('addExample').addEventListener('click', () => {
-      const n = exNative.value.trim();
-      const a = exAmma.value.trim();
-      if(!n || !a){ toast('Fill both fields to add an example'); return; }
-      const card = document.createElement('div');
-      card.className = 'ex';
-      const t = document.createElement('div'); t.className = 't'; t.textContent = `${n} → ${a}`;
-      const s = document.createElement('div'); s.className = 'a'; s.textContent = 'User example';
-      card.appendChild(t); card.appendChild(s); exList.appendChild(card);
-      exNative.value = ''; exAmma.value = ''; exNative.focus();
-      toast('Example added');
-    });
-
-    // Toasts (tiny)
-    const toast = (msg) => {
-      const t = document.createElement('div');
-      t.textContent = msg;
-      t.style.position='fixed'; t.style.left='50%'; t.style.bottom='24px'; t.style.transform='translateX(-50%)';
-      t.style.padding='10px 14px'; t.style.borderRadius='12px'; t.style.background='rgba(255,255,255,.1)'; t.style.border='1px solid rgba(255,255,255,.25)'; t.style.backdropFilter='blur(6px)';
-      t.style.color='var(--text)'; t.style.boxShadow='var(--shadow)'; t.style.zIndex='9999';
-      document.body.appendChild(t);
-      setTimeout(()=> t.remove(), 1600);
-    }
-
-    // Build UI
-    buildKeyboard();
+    document.getElementById('copyBtn').addEventListener('click', async ()=>{ try{ await navigator.clipboard.writeText(editor.value); alert('Copied to clipboard'); }catch(e){ alert('Copy failed'); }});
+    document.getElementById('clearBtn').addEventListener('click', ()=>{ editor.value=''; editor.focus(); });
+    document.getElementById('downloadBtn').addEventListener('click', ()=>{ const blob = new Blob([editor.value], {type:'text/plain;charset=utf-8'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='telugu-amma.txt'; a.click(); URL.revokeObjectURL(url); });
   </script>
 </body>
 </html>
+
